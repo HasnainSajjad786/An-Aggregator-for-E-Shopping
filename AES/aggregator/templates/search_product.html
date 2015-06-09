@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if session.logged_in %}
+
+  {% if error %}
+    <p class=error><strong>Error:</strong> 
+    {{ error }}
+  {% endif %}
+
+  <div class=flash>{{ welcomeMessage }}</div>
+
+    <form action="{{ url_for('search_product') }}" class=add-entry method=post>
+      <table style="width:70%">
+        <tr>
+          <th align="left">Product Name</th>
+          <th align="left">Show only</th>
+          <th align="left">Sort in Price</th>
+        </tr>
+        <tr>
+          <td><input type=text size=30 name=product required></td>
+          <td><input type=text size=30 name=record required><br></td>
+          <td><input type="radio" name="order" value="asc" required>Ascending
+          <input type="radio" name="order" value="desc" required>Descending</td>
+          <td><input type=submit value=Search></td>
+        </tr>
+        <br>
+        <tr>
+          
+        </tr>
+      </table>
+    </form>
+  
+  {% if stores %}
+  <ul class=entries>
+  <table style="width:100%">
+    <tr>
+      <th align="left"> S.No </th>
+      <th align="left"> Product Name </th>
+      <th align="left"> Price </th>
+      <th align="left"> Buy At </th>
+    </tr>
+  {% for store in stores %}
+    <tr>
+      <td> {{ store['count'] }} </td>
+      <td> {{ store['title'] }} </td>
+      <td> {{ store['available_price'] }} </td>
+      <td> <a href="{{ store['url'] }}" target="_blank"> {{ store['source'] }} </a> </td>
+    </tr>
+  {% endfor %}
+  </table>
+  </ul>
+  {% endif %}
+  {% endif %}
+  
+  
+{% endblock %}

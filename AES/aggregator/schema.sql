@@ -1,0 +1,1 @@
+create table userDetails (id INTEGER primary key autoincrement, fName text, lName text, uid text, key text, email text, phone text);
